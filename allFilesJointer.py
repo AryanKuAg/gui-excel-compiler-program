@@ -9,8 +9,6 @@ ws = workbook.active
 
 
 def allFilesJointer(filenames, saveFileName):
-    print(filenames)
-    print(saveFileName)
 
     for files in range(len(filenames)):
         tempList = []
@@ -27,7 +25,8 @@ def allFilesJointer(filenames, saveFileName):
         if total_rows < 1 or total_cols < 1:
             break
 
-        ws.append([str(loc)])  # This is the file name above the sheet
+        # This is the file name above the sheet
+        ws.append([str(loc)[loc.rfind('/') + 1:]])
 
         ws.append([''])  # This is a gap between name and the data
         #########
