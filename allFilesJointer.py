@@ -28,6 +28,7 @@ def allFilesJointer(filenames, saveFileName):
             break
 
         ws.append([str(loc)])  # This is the file name above the sheet
+
         ws.append([''])  # This is a gap between name and the data
         #########
         for row in range(total_rows):
@@ -47,5 +48,3 @@ def allFilesJointer(filenames, saveFileName):
         workbook.save(str(saveFileName)+'.xlsx')
         tempList = []
         workbook.close()
-
-    # for row in range()

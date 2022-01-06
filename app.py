@@ -1,3 +1,4 @@
+import webbrowser
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -40,7 +41,8 @@ def select_files():
 
 root = Tk()
 root.title('Multiple Excel Files Joiner by Alemantrix Aryan Agrawal')
-root.iconbitmap()  # it contain the app icon
+# it contain the app icon
+root.iconbitmap('.\icon.ico')
 root.resizable(False, False)
 root.geometry('300x300')
 
@@ -82,7 +84,7 @@ def ask_the_directory():
 
 ####################
 space2 = Label(root, text='''
-
+MERA PAISA BAAKI HAI
 
 ''').pack()
 
@@ -108,9 +110,16 @@ def extraction_button_updater():
     extract_button.config(state=ACTIVE)
 
 
-space3 = Label(root, text='''       
+space3 = Label(root, text='''''').pack()
 
 
-''').pack()
+def follow_me():
+    url = 'https://www.instagram.com/alemantrixaryanagrawal/'
+    chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+    webbrowser.get(chrome_path).open(url)
+
+
+Button(root, text="Follow Me!!!", command=lambda: follow_me()).pack()
+Label(text="Software By © 2022 Alemantrix").pack()
 
 root.mainloop()
