@@ -13,6 +13,7 @@ no_of_files_selected = 0
 #################################
 
 #################################
+excelFileNames = ''
 
 
 def select_files():
@@ -30,7 +31,9 @@ def select_files():
     if no_of_files_selected > 0:
         extraction_button_updater()
         update_selected_file_status(no_of_files_selected)
-        allFilesJointer(filenames)
+        global excelFileNames
+        excelFileNames = filenames
+
 
 ######################################
 
@@ -39,9 +42,10 @@ root = Tk()
 root.title('Multiple Excel Files Joiner by Alemantrix Aryan Agrawal')
 root.iconbitmap()  # it contain the app icon
 root.resizable(False, False)
-root.geometry('300x350')
+root.geometry('300x300')
 
-space1 = Label(root, text=''' ''').pack(
+space1 = Label(root, text=''' 
+''').pack(
 )  # This is for the space between two buttons
 
 select_file_button = Button(
@@ -59,18 +63,25 @@ def update_selected_file_status(no):
 
 
 def ask_the_directory():
-    directory = fd.askdirectory()
-    extraction_location_status.config(text=directory)
-    print(directory)
+    print('ask teh directory')
+    # directory = fd.SaveFileDialog(master='/')
+    savefilename = fd.asksaveasfilename(
+        initialdir='/', title='Save File', filetypes=(('Excel File', 'Compiled.xlsx'), ('All Files', '*.*')))
+
+    if savefilename and excelFileNames != '':
+        allFilesJointer(excelFileNames, savefilename)
+        extract_button.config(state=DISABLED)
 
 
-extraction_location_button = Button(
-    root, text="Select Location", padx=50, pady=20, command=ask_the_directory).pack()
-extraction_location_status = Label(root, text="No Location Selected")
-extraction_location_status.pack()
-##########
+# extraction_location_button = Button(
+#     root, text="Select Location", padx=50, pady=20, command=ask_the_directory).pack()
+# extraction_location_status = Label(root, text="No Location Selected")
+# extraction_location_status.pack()
+# ##########
 
-space2 = Label(root, text='''       
+
+####################
+space2 = Label(root, text='''
 
 
 ''').pack()
@@ -81,8 +92,9 @@ extract_button = Button(root, text="Extract", padx=30,
                         pady=10, command=ask_the_directory)
 
 if no_of_files_selected == 0:
-    extract_button = Button(root, text="Extract", padx=30,
-                            pady=10, state=DISABLED)
+    # extract_button = Button(root, text="Extract", padx=30,
+    #                         pady=10, state=DISABLED)
+    extract_button.config(state=DISABLED)
 
 
 extract_button.pack()
@@ -94,9 +106,6 @@ extraction_status = Label(root, text="Nothing Happening")
 def extraction_button_updater():
     global extract_button
     extract_button.config(state=ACTIVE)
-    # extract_button.pack_forget()
-    # extract_button = Button(root, text="Extract", padx=30,
-    #                         pady=10).pack()
 
 
 space3 = Label(root, text='''       

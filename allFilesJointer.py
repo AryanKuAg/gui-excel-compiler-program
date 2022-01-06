@@ -8,21 +8,14 @@ workbook = Workbook()
 ws = workbook.active
 
 
-def allFilesJointer(filenames):
-
-    # print(filenames[0])
-    # haha = xlrd.count_records(filenames[0])
-    # loc = filenames[0]
-    # book = xlrd.open_workbook(loc)
-    # # print(xlrd.sheet.Sheet(book).row_len)
-    # sheet = book.sheet_by_index(0)
-    # print(sheet.nrows)
-    # print(sheet.ncols)
+def allFilesJointer(filenames, saveFileName):
+    print(filenames)
+    print(saveFileName)
 
     for files in range(len(filenames)):
         tempList = []
         loc = (filenames[files])
-        print(loc)
+
         try:
             wb = xlrd.open_workbook(loc)
         except:
@@ -51,7 +44,7 @@ def allFilesJointer(filenames):
 
         ws.append([''])
 
-        # workbook.save('jointjoint.xlsx')
+        workbook.save(str(saveFileName)+'.xlsx')
         tempList = []
         workbook.close()
 
