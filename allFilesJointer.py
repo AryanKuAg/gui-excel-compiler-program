@@ -51,7 +51,7 @@ def allFilesJointer(filenames):
 
         ws.append([''])
 
-        workbook.save('jointjoint.xlsx')
+        # workbook.save('jointjoint.xlsx')
         tempList = []
         workbook.close()
 

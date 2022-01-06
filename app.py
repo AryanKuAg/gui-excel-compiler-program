@@ -27,9 +27,10 @@ def select_files():
         filetypes=filetypes)
 
     no_of_files_selected = len(filenames)
-
-    update_selected_file_status(no_of_files_selected)
-    allFilesJointer(filenames)
+    if no_of_files_selected > 0:
+        extraction_button_updater()
+        update_selected_file_status(no_of_files_selected)
+        allFilesJointer(filenames)
 
 ######################################
 
@@ -53,6 +54,7 @@ def update_selected_file_status(no):
     global selected_files_status
     selected_files_status.config(text=str(no) + ' files are selected')
 
+
 ##########
 
 
@@ -74,9 +76,29 @@ space2 = Label(root, text='''
 ''').pack()
 
 ##########
+# global extract_button
 extract_button = Button(root, text="Extract", padx=30,
-                        pady=10, command=ask_the_directory).pack()
+                        pady=10, command=ask_the_directory)
+
+if no_of_files_selected == 0:
+    extract_button = Button(root, text="Extract", padx=30,
+                            pady=10, state=DISABLED)
+
+
+extract_button.pack()
 extraction_status = Label(root, text="Nothing Happening")
+
+##########
+
+
+def extraction_button_updater():
+    global extract_button
+    extract_button.config(state=ACTIVE)
+    # extract_button.pack_forget()
+    # extract_button = Button(root, text="Extract", padx=30,
+    #                         pady=10).pack()
+
+
 space3 = Label(root, text='''       
 
 
